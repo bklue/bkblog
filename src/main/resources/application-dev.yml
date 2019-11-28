@@ -46,14 +46,16 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  output:
+    ansi:
+      enabled: detect  #自动检测终端是否支持彩色
+
 
 mybatis:
   mapper-locations: classpath:mapper/*/*.xml
   type-aliases-package: com.example.demo.entity
 
 
-
-
-
-
+logging:
+  config: classpath:logback-spring.xml
 

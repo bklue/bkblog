@@ -1,6 +1,7 @@
 package com.tyn.blog.mapper.common;
 
-import com.example.demo.entity.common.User;
+
+import com.tyn.blog.entity.common.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;

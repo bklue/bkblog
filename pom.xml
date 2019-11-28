@@ -69,7 +69,9 @@
             <artifactId>jedis</artifactId>
             <version>2.9.3</version>
         </dependency>
+
     </dependencies>
+
 
     <build>
         <plugins>
