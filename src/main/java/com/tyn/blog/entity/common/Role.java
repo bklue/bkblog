@@ -2,10 +2,8 @@ package com.tyn.blog.entity.common;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author wanglei
@@ -17,9 +15,19 @@ import javax.persistence.Table;
 @Table(name = "s_role")
 public class Role {
     @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "user_id",insertable = false,updatable = false)
-    private int userId;
+//    @Column(name = "user_id",insertable = false,updatable = false)
+//    private int userId;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "create_time")
+    private Date createTime ;
+
+    @Column(name = "update_time")
+    private Date updateTime;
 }

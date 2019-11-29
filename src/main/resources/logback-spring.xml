@@ -5,16 +5,23 @@
 <configuration scan="true" scanPeriod="180 seconds" debug="false">
     <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
     <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
-    <property name="LOG_PATTERN" value="%d{HH:mm:ss.SSS} %-5level %logger{36} [%line] - %msg%n" />
+    <property name="LOG_PATTERN" value="%d{HH:mm:ss.SSS} %-5level %thread %logger{36} [%line] - %msg%n" />
 
     <!-- 定义日志存储的路径，不要配置相对路径 -->
     <property name="FILE_PATH" value="D:/logs/%d{yyyy-MM-dd}.%i.log" />
 
+    <!--0. 日志格式和颜色渲染 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
     <!-- 控制台输出日志 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <!-- 按照上面配置的LOG_PATTERN来打印日志 -->
-            <pattern>${LOG_PATTERN}</pattern>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
 
     </appender>
@@ -34,13 +41,14 @@
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-    <!-- 级别从小到达：ERROR、WARN、INFO、DEBUG -->
+    <!-- 级别从大到小：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
     <!--用户指定包下 打印等级大于等于INFO级别-->
-    <logger name="com.tyn.blog" level="INFO"  />
-
+    <logger name="com.tyn.blog" level="DEBUG" >
+        <appender-ref ref="CONSOLE" />
+    </logger>
     <!-- 其它包下的打印超过 WARN级别的 -->
     <root level="WARN">
-        <appender-ref ref="CONSOLE" />
         <appender-ref ref="FILE" />
+        <appender-ref ref="CONSOLE" />
     </root>
 </configuration>

@@ -7,10 +7,11 @@ package com.tyn.blog.constant;
  */
 
 public enum LogLevel {
-    ERROR(40,"ERROR"),
-    WARN(30, "WARN");
+    ERROR(40),
+    WARN(30);
 
-    LogLevel(int i, String level) {
+    LogLevel(int value) {
 
     }
+
 }
