@@ -1,5 +1,7 @@
 server:
   port: 8899
+  servlet:
+    context-path: /sb
 spring:
   datasource:
     username: root
@@ -58,4 +60,12 @@ mybatis:
 
 logging:
   config: classpath:logback-spring.xml
+
+appKey: 1
+appSecret: 1
+bucket: lynn
+endPoint: https://www.aliyun.com
+
+
+
 
