@@ -15,8 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 public class TestInterceptor  implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println(request.getRemoteAddr());
-        System.out.println("进入拦截器");
+        //System.out.println(request.getRemoteAddr());
+        System.out.println("请求路径=====>"+request.getContextPath());
+        //System.out.println("进入拦截器");
         return true;
     }
 

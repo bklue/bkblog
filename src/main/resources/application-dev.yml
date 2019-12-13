@@ -1,7 +1,8 @@
 server:
-  port: 8899
+  port: 8008
+#  ${random.int[1024,9999]} 随机端口
   servlet:
-    context-path: /sb
+    context-path: /sb  #配置初始路径
 spring:
   datasource:
     username: root
@@ -61,10 +62,9 @@ mybatis:
 logging:
   config: classpath:logback-spring.xml
 
-appKey: 1
-appSecret: 1
-bucket: lynn
-endPoint: https://www.aliyun.com
+
+#全局变量配置
+god: faker
 
 
 
