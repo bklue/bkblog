@@ -12,21 +12,24 @@ import javax.servlet.http.HttpServletResponse;
  * @Description todo
  * @date 12/6/2019 2:40 PM
  */
-public class TestInterceptor  implements HandlerInterceptor {
-    @Override
+public class TestInterceptor  implements HandlerInterceptor {//另一种MethodInterceptor是AOP项目中的拦截器
+                                        //HandlerInterceptor是springMVC项目中的拦截器
+    @Override//请求前调用
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //System.out.println(request.getRemoteAddr());
-        System.out.println("请求路径=====>"+request.getContextPath());
-        //System.out.println("进入拦截器");
+        System.out.println("ContextPath=====>"+request.getContextPath());
+        System.out.println("ServletPath=====>"+request.getServletPath());
+
+
         return true;
     }
 
-    @Override
+    @Override//请求之后调用
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception {
 
     }
 
-    @Override
+    @Override//完成时调用
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
 
     }

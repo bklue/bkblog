@@ -4,11 +4,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author lover
  */
 @EnableAsync
+@EnableSwagger2
 @MapperScan({"com.tyn.blog.mapper.admin",""})
 @SpringBootApplication//可以被以下几个注解代替：SpringBootConfiguration 表示 Spring Boot 的配置注解，
 // EnableAutoConfiguration 表示自动配置，ComponentScan 表示 Spring Boot 扫描 Bean 的规则，比如扫描哪些包。

@@ -1,40 +1,107 @@
 package com.tyn.blog.controller;
 
-import com.tyn.blog.utils.TestUtil;
+import com.tyn.blog.constant.ResultCode;
+import com.tyn.blog.entity.common.Hero;
+import com.tyn.blog.entity.common.TestValidation;
+import com.tyn.blog.exception.AccountException;
+import com.tyn.blog.service.TestService;
+import com.tyn.blog.utils.TestAsync;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @author wangl
  * @Description todo
  * @date 12/12/2019 2:55 PM
  */
+@Api(tags = {"测试用户接口"})
 @RestController
 public class TestController {
-    @Autowired
-    private TestUtil util;
+
     //与直接注释@Slf4j作用类似，底层框架必须包含 org.slf4j.impl.StaticLoggerBindder,slf4j将会主动去寻找这个类
     private static final Logger log = LoggerFactory.getLogger(TestController.class);
+
+    @Autowired
+    private TestAsync util;
+    @Autowired
+    private TestService testService;
 
     @Value("${god}")
     private String god;
 
-    @RequestMapping("/home")
-    public String home(){
-        return god;
+    //tags用在方法上会在swagger首页显示这个接口
+    @ApiOperation(value = "获取首页信息方法",notes = "这是提示信息note")
+    @PostMapping("/home")
+    public Hero home(@RequestBody @ApiParam(value = "英雄",required = true)  Hero hero){
+
+        return  hero ;
     }
 
-    @RequestMapping("/as1")
-    public String as1(){
-        util.addTest();
-        return "successful";
+    @ApiOperation(value = "区域测试")
+    @PostMapping("/hero")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="area",value="区域",dataType="string", paramType = "query"  )})
+    public String hero( String area){
+        if(1==1)
+            throw new AccountException(ResultCode.USER_HAS_EXISTED);
+        return area + god ;
     }
-    @RequestMapping("/as2")
+
+    @ApiOperation("区域排行测试")
+    @PostMapping("/hero1")
+    public String hero1(String area, String rank){
+        int a = 1/0;
+        return area + god + rank ;
+    }
+
+    @ApiOperation("测试全局异常")
+    @GetMapping("/test")
+    public String test(String s){
+        return testService.test(s);
+    }
+
+    @ApiOperation("测试参数校验")
+    @PostMapping("/test1")
+    public TestValidation test1(@Validated TestValidation t){
+        return t;
+    }
+
+    @ApiOperation("查询测试")
+    @GetMapping("/select")
+    //@ApiImplicitParam(name="name",value="用户名",dataType="String", paramType = "query")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="name",value="用户名",dataType="string", paramType = "query"),
+            @ApiImplicitParam(name="id",value="用户id",dataType="int", paramType = "query",example = "1")})
+    //传入独立参数
+    public String select(int id,String name){
+
+        System.out.println("select测试"+id);
+        return name;
+    }
+
+
+
+
+
+    //@PathVariable可以把参数以占位符的方式映射到方法中
+    @ApiIgnore
+    @GetMapping("/as1/{area}")
+    public String as1(@PathVariable("area") String area){
+        util.addTest();
+        return "successful==="+area;
+    }
+
+    //没有ApiIgnore的方法都会显示在swagger中
+    @ApiIgnore
+    @GetMapping("/as2")
     public String as2(){
         util.addPoll();
         return  "change  successful";

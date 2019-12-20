@@ -1,8 +1,8 @@
 server:
   port: 8008
 #  ${random.int[1024,9999]} 随机端口
-  servlet:
-    context-path: /sb  #配置初始路径
+#  servlet:
+#    context-path: /sb  #配置初始路径
 spring:
   datasource:
     username: root
@@ -49,9 +49,17 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  output:
-    ansi:
-      enabled: detect  #自动检测终端是否支持彩色
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+#    设置ack尝试次数
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 5
 
 
 mybatis:
