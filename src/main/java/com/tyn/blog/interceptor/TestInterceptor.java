@@ -17,10 +17,7 @@ public class TestInterceptor  implements HandlerInterceptor {//另一种MethodIn
     @Override//请求前调用
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //System.out.println(request.getRemoteAddr());
-        System.out.println("ContextPath=====>"+request.getContextPath());
-        System.out.println("ServletPath=====>"+request.getServletPath());
-
-
+        System.out.println("请求路径=====>"+request.getServletPath());
         return true;
     }
 

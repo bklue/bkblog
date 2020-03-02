@@ -19,7 +19,7 @@ import java.util.List;
  */
 @SpringBootConfiguration
 public class WebConfiguration  extends WebMvcConfigurationSupport {//也可以直接实现WebMvcConfigurer，
-                                                            // WebMvcConfigurerAdapter过时
+                                                            // 继承WebMvcConfigurerAdapter过时
 
 
 

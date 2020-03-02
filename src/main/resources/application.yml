@@ -1,4 +1,23 @@
+server:
+  port: 8088
 spring:
   profiles:
-    active: dev
+    active: prod
+  jpa:
+    open-in-view: false
+  application:
+    name: blog-s
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8089/eureka/
 
+  instance:
+    #  instance-id,是再注册中心页面显示的微服务名。
+    instance-id: blog-service-provider
+    # 设置微服务调用地址为IP优先（缺省为false）
+    prefer-ip-address: true
+    # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-renewal-interval-in-seconds: 30
+    # 发呆时间，即服务续约到期时间（缺省为90s）
+    lease-expiration-duration-in-seconds: 90

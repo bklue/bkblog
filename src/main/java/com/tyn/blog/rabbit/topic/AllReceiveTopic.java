@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RabbitListener(bindings = @QueueBinding(
         value = @Queue(value = "allto",autoDelete = "true"),
-        exchange =@Exchange(value = "firExTopic",type = ExchangeTypes.TOPIC),//默认交换器类型为diect
+        exchange =@Exchange(value = "firExTopic",type = ExchangeTypes.TOPIC),//主题，规则匹配
         key = "*.log.*")//#表示匹配多个词
 )
 public class AllReceiveTopic {

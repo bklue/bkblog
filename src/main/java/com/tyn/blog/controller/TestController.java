@@ -1,8 +1,8 @@
 package com.tyn.blog.controller;
 
 import com.tyn.blog.constant.ResultCode;
-import com.tyn.blog.entity.common.Hero;
-import com.tyn.blog.entity.common.TestValidation;
+import com.tyn.blog.po.jpa.Role;
+import com.tyn.blog.vo.TestValidation;
 import com.tyn.blog.exception.AccountException;
 import com.tyn.blog.service.TestService;
 import com.tyn.blog.utils.TestAsync;
@@ -12,10 +12,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import springfox.documentation.annotations.ApiIgnore;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author wangl
@@ -40,7 +44,7 @@ public class TestController {
     //tags用在方法上会在swagger首页显示这个接口
     @ApiOperation(value = "获取首页信息方法",notes = "这是提示信息note")
     @PostMapping("/home")
-    public Hero home(@RequestBody @ApiParam(value = "英雄",required = true)  Hero hero){
+    public Role home(@RequestBody @ApiParam(value = "英雄",required = true)  Role hero){
 
         return  hero ;
     }
@@ -70,8 +74,15 @@ public class TestController {
 
     @ApiOperation("测试参数校验")
     @PostMapping("/test1")
-    public TestValidation test1(@Validated TestValidation t){
+    public TestValidation test1(@RequestBody @Validated TestValidation t){
         return t;
+    }
+
+    @ApiOperation("测试assert参数")
+    @GetMapping("/test2")
+    public String test2(String s){
+        Assert.hasText(s,"s不能为空");
+        return  s;
     }
 
     @ApiOperation("查询测试")
@@ -82,11 +93,28 @@ public class TestController {
             @ApiImplicitParam(name="id",value="用户id",dataType="int", paramType = "query",example = "1")})
     //传入独立参数
     public String select(int id,String name){
-
-        System.out.println("select测试"+id);
-        return name;
+        return id+name;
     }
 
+    @ApiOperation("插入数据测试")
+    @GetMapping("/add")
+    public String add(String sb) throws InterruptedException {
+        System.out.println(sb);
+        return testService.add();
+
+    }
+    @ApiOperation("删除数据测试")
+    @GetMapping("/del")
+    public void del(){
+        testService.del();
+    }
+
+    @ApiOperation("查询数据测试")
+    @GetMapping("/get")
+    public void get(){
+        testService.getOne();
+        testService.getByExampkle();
+    }
 
 
 

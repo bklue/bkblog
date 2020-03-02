@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
 //@After: final增强，不管是抛出异常或者正常退出都会执行
 
 @Aspect
-@Component  //表示由spring来管理
+@Component
 @Slf4j   //日志管理
 public class TestAspect {
     //凡是注解了RequestMapping的方法都被拦截

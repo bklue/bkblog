@@ -1,4 +1,4 @@
-package com.tyn.blog.entity.common;
+package com.tyn.blog.po.jpa;
 
 import lombok.Data;
 
@@ -10,6 +10,7 @@ import java.util.Date;
  * @Description todo
  * @date 2019/11/15 0015 下午 14:43
  */
+
 @Data
 @Entity
 @Table(name = "s_role")
@@ -19,8 +20,8 @@ public class Role {
     @Column(name = "id")
     private int id;
 
-//    @Column(name = "user_id",insertable = false,updatable = false)
-//    private int userId;
+    @Column(name = "temp")
+    private String temp;
 
     @Column(name = "name")
     private String name;
@@ -30,4 +31,6 @@ public class Role {
 
     @Column(name = "update_time")
     private Date updateTime;
+
+
 }

@@ -33,7 +33,6 @@ public class ResponseConfiguration implements ResponseBodyAdvice<Object> {
             //个人认为不转化也是json
             return JSON.toJSON(ResResult.success(o));
             //return ResResultUtil.success(o);
-
         } else if(o instanceof ErrorResult){
             ErrorResult error = (ErrorResult) o;
             return ResResult.fail(error.getStatus(),error.getMessage());

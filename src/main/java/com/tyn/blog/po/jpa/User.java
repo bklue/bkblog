@@ -1,10 +1,10 @@
-package com.tyn.blog.entity.common;
+package com.tyn.blog.po.jpa;
 
 import lombok.Data;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author wanglei
@@ -46,4 +46,6 @@ public class User {
     @Column(name = "update_time")
     private Date updateTime;
 
+    @Column(name = "remake")
+    private String remake;
 }

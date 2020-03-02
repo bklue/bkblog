@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @RabbitListener(bindings = @QueueBinding(
         value = @Queue(value = "emsfa",autoDelete = "false"),//持久化，
-        exchange = @Exchange(value = "MyFanout",type = ExchangeTypes.FANOUT)
+        exchange = @Exchange(value = "MyFanout",type = ExchangeTypes.FANOUT)//广播
 ))
 @Component
 public class EmsReceiveFanout {
