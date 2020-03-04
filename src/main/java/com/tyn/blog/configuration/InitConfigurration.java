@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * @date 12/16/2019 5:19 PM
  */
 
-@Import(Dog.class)  //使用import转入IOC
+@Import(Dog.class)  //使用import注入IOC
 @SpringBootConfiguration
 public class InitConfigurration implements ApplicationRunner {
     @Autowired

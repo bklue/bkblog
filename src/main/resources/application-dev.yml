@@ -81,9 +81,8 @@
 #          max-attempts: 5
 #
 #mybatis:
-#classpath后面的 * 必不可少,，缺少型号的话后面的通配符不起作用。
-#                **表示可以表示任意多级目录。
-#如果mapper.xml文件放在resources中需要下面这行配置，如果和dao接口放在一个包中不需要
+# classpath后面的 * 必不可少,，缺少*号的话后面的通配符不起作用。   **表示可以表示任意多级目录。
+# 如果mapper.xml文件放在resources中需要下面这行配置，如果和dao接口放在一个包中不需要
 #  mapper-locations: classpath:mapper/*/*.xml
 #  type-aliases-package: com.example.demo.po
 #
@@ -95,6 +94,4 @@
 ##全局变量配置
 #god: faker
 #
-#
-#
-#
+

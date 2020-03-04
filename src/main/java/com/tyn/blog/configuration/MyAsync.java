@@ -26,6 +26,7 @@ public class MyAsync {
         taskPoll.setKeepAliveSeconds(100);
         taskPoll.setThreadGroupName("gro");
         taskPoll.setThreadNamePrefix("tas-");
+
         //缓存队列满切线程数目达到最大是采用拒绝策略
         //abort:丢弃任务并抛出异常
         //discard:丢弃任务但不抛出异常
